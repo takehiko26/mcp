@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import StockSearch from './components/StockSearch';
 import StockCard from './components/StockCard';
+import TimeSeriesSection from './components/TimeSeriesSection';
 
 const App = () => {
   const [stockData, setStockData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [currentSymbol, setCurrentSymbol] = useState('');
 
   const handleStockData = (data) => {
     setStockData(data);
+    setCurrentSymbol(data.symbol);
   };
 
   const handleLoading = (isLoading) => {
@@ -43,6 +46,8 @@ const App = () => {
       {stockData && !loading && (
         <StockCard stockData={stockData} />
       )}
+      
+      <TimeSeriesSection symbol={currentSymbol} />
     </div>
   );
 };
